@@ -99,3 +99,28 @@ int main() {
 Before swapping: x = 10, y = 20
 After swapping: x = 20, y = 10
 ```
+
+## Address vs pointer in function
+
+```cpp
+// Function using reference
+void doubleValueReference(int &x) {
+    x *= 2;  // Modifies the original variable
+    cout << "Value inside function (using reference): " << x << endl;
+}
+
+// Function using pointer
+void doubleValuePointer(int *x) {
+    *x *= 2;  // Dereference the pointer to modify the value
+    cout << "Value inside function (using pointer): " << *x << endl;
+}
+
+int main() {
+    int a = 5;
+    doubleValueReference(a);  // Pass by reference
+    int b = 5;
+    doubleValuePointer(&b);  // Pass the address of 'b'
+    return 0;
+}
+
+```
