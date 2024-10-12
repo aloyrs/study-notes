@@ -8,6 +8,22 @@ switch (<cond>){
 }
 ```
 
+```cpp
+switch (x) {
+    case 1:
+        x += 1;
+    case 2:
+        x += 2;
+    case 3:
+        x += 3;
+        break;
+    default:
+        x = 0;
+    }
+```
+
+- if no break in case , flows to next case without checking til end of switch-case block , known as "fall-through"
+
 # std::string
 
 basically better than C-String
