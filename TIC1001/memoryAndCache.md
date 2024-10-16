@@ -19,5 +19,5 @@
 ## Types of cache mapping
 
 - Direct-Mapped: each memory block is mapped to exactly one cache block using a specific index derived from the block number (Cache index=Block number%Number of cache blocks)
-- Fully Associative: any memory block can be loaded into any cache block
+- Fully Associative: any memory block can be loaded into any cache block , has Replacement policy : either FIFO (First-In-First-Out) OR LRU (Least Recently Used)
 - Set-Associative: Balanced approach, reducing conflicts while managing complexity
