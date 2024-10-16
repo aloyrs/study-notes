@@ -18,6 +18,6 @@
 
 ## Types of cache mapping
 
-- Direct-Mapped: Simple, fast, but more prone to conflicts.
-- Fully Associative: Flexible, fewer misses, but complex and costly.
-- Set-Associative: Balanced approach, reducing conflicts while managing complexity.
+- Direct-Mapped: each memory block is mapped to exactly one cache block using a specific index derived from the block number (Cache index=Block number%Number of cache blocks)
+- Fully Associative: any memory block can be loaded into any cache block
+- Set-Associative: Balanced approach, reducing conflicts while managing complexity
