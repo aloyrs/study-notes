@@ -36,3 +36,21 @@ printf("%s",name);
 // strcpy
 // strcat
 ```
+
+# Arrays
+
+```c
+void test(int arr[]) {
+    printf("%lu", sizeof(arr));
+}
+
+int main(void) {
+    int x[10] = {0};
+    printf("%lu ", sizeof(x));
+    test(x);
+}
+
+// 40 8
+```
+
+The reason why the second output is 8 is because arrays are passed by reference. So arr is a pointer which is either 64 bits (8 bytes) or 32 bits (4 bytes) depending on your system memory size.

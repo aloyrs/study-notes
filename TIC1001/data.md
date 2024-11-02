@@ -26,3 +26,16 @@ Was not good enough as only maximum of 128 unique characters (from 7 bits)
   - 2 bytes for characters from U+0080 to U+07FF.
   - 3 bytes for characters from U+0800 to U+FFFF.
   - 4 bytes for characters from U+10000 to U+10FFFF.
+
+# Memory
+
+1 byte = 8 bits
+
+```c
+long arr[10];
+printf("%p %p", &arr[0], &arr[1]);
+
+// 0x7fff42a0 0x7fff42a4
+```
+
+because int takes 4 bytes of memory
