@@ -6,4 +6,8 @@ Users - use SQL -> in DBMS -> which affects DB
 
 Atomicity: Either all or none are executed (eg. Bank transaction)
 
-Consistency :
+Consistency: Ensure consistent data type , etc.
+
+Isolation: Ensures that transactions happening at the same time do not affect each other(eg. 2 bank transcations at the same time on same account)
+
+Durability: Guarantees that once a transaction is committed, its changes are permanent even in cases of power loss, crashes, or errors.
