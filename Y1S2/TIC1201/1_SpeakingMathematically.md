@@ -49,3 +49,21 @@
 - Commutative
 - Distributiveity
 - Trichotomy
+
+---
+
+> "Without loss of generality"
+
+- is a common phrase used in mathematical and logical reasoning to simplify problems or proofs by focusing on a specific case while asserting that the conclusion will be valid for all other similar cases.
+
+# Types of proof
+
+## Proof by Construction
+
+![alt text](image-2.png)
+
+Explicitly find the value with the correct properties
+
+## Disproof by counter
+
+![alt text](image-3.png)
