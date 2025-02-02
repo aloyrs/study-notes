@@ -79,3 +79,23 @@ frac->num
 Without parentheses, **\*frac.num** would be interpreted incorrectly.
 
 So we use **frac->num** instead, where frac is a pointer
+
+# Alias
+
+```cpp
+struct Person {
+    string name;
+    int age;
+    char gender;
+};
+
+int main() {
+    Person s = {"Potter", 13, 'm'};
+    Person& p = s;
+
+    p.age = 14;
+
+    cout << "Original age: " << s.age << endl; //14
+    cout << "Alias age: " << p.age << endl; //14
+}
+```
