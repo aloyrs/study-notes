@@ -28,4 +28,19 @@ XOR = (p ∨ q) ∧ ~(p ∧ q)
 
 1 to 11 ....
 
-# Conditional Statements
+# Contrapositive, Converse, Inverse
+
+- The contrapositive of p → q is ~q → ~p
+- The converse of p → q is q → p
+- The inverse of p → q is ~p → ~q
+
+# Argument
+
+Argument = a sequence of statements ending in a conclusion
+![alt text](image-6.png)
+
+![alt text](image-13.png)
+![alt text](image-12.png)
+
+Truth table to determine a argument
+![alt text](image-9.png)
