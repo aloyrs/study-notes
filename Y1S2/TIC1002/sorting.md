@@ -11,3 +11,9 @@
 - the right side forms a sorted sub-array, repeat until all large values bubble up to the right , array will be sorted small to large
 
 # Insertion sort
+
+- Start from left , assume first element in array is sorted.
+- Work from left to right from index 1 to check if it is in the right place in accordance to the sorted array (if its smaller then swap with values in sorted array to find its place)
+- Keep looping until each value is in the sorted array, array will be sorted smallest to largest
+
+# Counting sort
