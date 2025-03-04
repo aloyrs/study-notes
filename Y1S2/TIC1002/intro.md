@@ -1,4 +1,4 @@
-Intro to TIC1002
+# Intro to TIC1002
 
 ```cpp
 // Create a struct
@@ -13,7 +13,7 @@ Fraction fractionTwo = {1,4}
 
 ```
 
-# Pass by value
+## Pass by value
 
 ```cpp
 void inverse(Fraction frac) {
@@ -27,7 +27,7 @@ int main()
 }
 ```
 
-# Pass by reference
+## Pass by reference
 
 ```cpp
 void inverse(Fraction & frac) {
@@ -42,7 +42,7 @@ int main()
 // Not very obvious from main when comparing to pass by value
 ```
 
-# Pass by pointer
+## Pass by pointer
 
 - more used than 'pass by reference'
 
@@ -60,7 +60,7 @@ int main()
 
 ```
 
-# ->
+## ->
 
 The -> operator provides a shortcut for accessing members (fields or methods) of a structure or class through a pointer
 
@@ -80,7 +80,7 @@ Without parentheses, **\*frac.num** would be interpreted incorrectly.
 
 So we use **frac->num** instead, where frac is a pointer
 
-# Alias
+## Alias
 
 ```cpp
 struct Person {
