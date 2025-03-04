@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Searching
 
 ## Linear Search
@@ -20,3 +21,14 @@
 | ------ | ----------------- | ----- | --------------- |
 | Linear | O(1) / O(n)       | O(1)  | No              |
 | Binary | O(1) / O(log n)   | O(1)  | Yes             |
+=======
+# Linear search
+
+- Use linear search when array is unsorted
+- O(n)
+
+# Binary Search
+
+- Use when array is sorted
+- O(log n)
+>>>>>>> 725f057d90aec9adee5d679ce5a5ad4339751830
