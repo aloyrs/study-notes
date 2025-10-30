@@ -1,6 +1,4 @@
-Here are the C++ implementations for Insertion Sort, Bubble Sort, and Selection Sort. All three are comparison-based, iterative, and **in-place** sorting algorithms, meaning they require only $O(1)$ extra space.
-
------
+# Sorting code
 
 ## 1\. Insertion Sort (C++ Code) 📌
 
@@ -18,7 +16,7 @@ void insertionSort(std::vector<int>& arr) {
         int key = arr[i]; // The element to be inserted
         int j = i - 1;
 
-        // Move elements of arr[0..i-1], that are greater than key, 
+        // Move elements of arr[0..i-1], that are greater than key,
         // to one position ahead of their current position
         while (j >= 0 && arr[j] > key) {
             arr[j + 1] = arr[j];
@@ -36,13 +34,13 @@ int main() {
     for (int x : data) {
         std::cout << x << " ";
     }
-    // Output: 5 6 11 12 13 
+    // Output: 5 6 11 12 13
     return 0;
 }
 */
 ```
 
------
+---
 
 ## 2\. Bubble Sort (C++ Code) 🛁
 
@@ -56,7 +54,7 @@ Bubble Sort repeatedly steps through the list, compares adjacent elements, and s
 void bubbleSort(std::vector<int>& arr) {
     int n = arr.size();
     bool swapped;
-    
+
     // Outer loop controls the number of passes
     for (int i = 0; i < n - 1; ++i) {
         swapped = false;
@@ -83,13 +81,13 @@ int main() {
     for (int x : data) {
         std::cout << x << " ";
     }
-    // Output: 1 2 4 5 8 
+    // Output: 1 2 4 5 8
     return 0;
 }
 */
 ```
 
------
+---
 
 ## 3\. Selection Sort (C++ Code) 🔍
 
@@ -128,7 +126,7 @@ int main() {
     for (int x : data) {
         std::cout << x << " ";
     }
-    // Output: 11 12 22 25 64 
+    // Output: 11 12 22 25 64
     return 0;
 }
 */
@@ -152,7 +150,7 @@ void merge(int a[], int low, int mid, int high) {
 void mergeSort(int a[], int low, int high) {
   // the array to be sorted is a[low..high]
   if (low < high) { // base case: low >= high (0 or 1 item)
-    int mid = (low+high) / 2; 
+    int mid = (low+high) / 2;
     mergeSort(a, low  , mid ); // divide into two halves
     mergeSort(a, mid+1, high); // then recursively sort them
     merge(a, low, mid, high); // conquer: the merge routine
@@ -162,13 +160,13 @@ void mergeSort(int a[], int low, int high) {
 
 ## 5. Counting sort
 
-* **Mechanism:** A non-comparison, **stable** sort effective only for **integers** within a small range ($k$). It determines the output position of each element by **counting its occurrences** in the input.
-* **Process:**
-    1.  Tally the **frequency** of each unique key in a temporary **Count Array**.
-    2.  Convert the Count Array into **cumulative counts** (prefix sums), which directly map to the final **starting index** of each key in the sorted output.
-    3.  Iterate backward through the input to place elements into the correct slot in the output array.
-* **Complexity:**
-    * Time: $O(n + k)$.
-    * Space: $O(n + k)$.
-* **Limitation:** Performance degrades significantly if the key range ($k$) is much larger than the number of elements ($n$).
-* **Primary Use:** When k is small
+- **Mechanism:** A non-comparison, **stable** sort effective only for **integers** within a small range ($k$). It determines the output position of each element by **counting its occurrences** in the input.
+- **Process:**
+  1.  Tally the **frequency** of each unique key in a temporary **Count Array**.
+  2.  Convert the Count Array into **cumulative counts** (prefix sums), which directly map to the final **starting index** of each key in the sorted output.
+  3.  Iterate backward through the input to place elements into the correct slot in the output array.
+- **Complexity:**
+  - Time: $O(n + k)$.
+  - Space: $O(n + k)$.
+- **Limitation:** Performance degrades significantly if the key range ($k$) is much larger than the number of elements ($n$).
+- **Primary Use:** When k is small
