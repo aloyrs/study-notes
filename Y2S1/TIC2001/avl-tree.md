@@ -1,5 +1,9 @@
 # AVL tree
 
+Adding to AVL tree, follows BST Property
+
+After adding to AVL tree, check the balance factors of nodes on the path from the newly inserted leaf up to the root. (to satify AVL property)
+
 ## I. Core Property & Performance
 
 - **Definition:** A self-balancing BST where the **Balance Factor** ($BF$) of every node is in $\{-1, 0, 1\}$.
