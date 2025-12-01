@@ -23,7 +23,7 @@ Rotations are performed on the lowest unbalanced ancestor ($Z$) to restore $|BF|
 | **Double** | **L-R** (Left-Right)  | Left child ($Y$), Right grandchild ($X$)  | $\text{Left Rotation}(Y)$, then $\text{Right Rotation}(Z)$ |
 | **Double** | **R-L** (Right-Left)  | Right child ($Y$), Left grandchild ($X$)  | $\text{Right Rotation}(Y)$, then $\text{Left Rotation}(Z)$ |
 
----
+https://www.geeksforgeeks.org/dsa/introduction-to-avl-tree/
 
 ## III. STL Associative Containers
 
