@@ -29,6 +29,7 @@ Maintain a max-heap of size k. The root will be the k-th smallest element. This 
 
 **6. AVL Tree operations**
 After adding 9, 11 and deleting 19:
+
 - Start: 18, 10, 19, 14, 6, 29, 12
 - Add 9: Goes left of 10
 - Add 11: Causes rotations
@@ -37,17 +38,69 @@ After adding 9, 11 and deleting 19:
 **Answer: d) 6, 9, 11, 14, 12, 29, 18, 10**
 
 **7. BST traversals**
-Given in-order: A, B, C, D, E, F, G, H, J, K, L
-Given post-order: L, K, J, H, G, F, E, D, C, B, A
 
-From post-order, the root is A. From in-order, everything is to the right of A.
+In-order: A, B, C, D, E, F, G, H, J, K, L
+Post-order: L, K, J, H, G, F, E, D, C, B, A
 
-**Answer: d) A, B, C, L, D, K, E, J, F, H, G**
+Key insight: In post-order traversal, the last element is always the root.
+Reconstruction process:
+
+Root = A (last element in post-order)
+
+In-order splits at A: [] | A | [B, C, D, E, F, G, H, J, K, L]
+Everything is in the right subtree
+
+For right subtree [B, C, D, E, F, G, H, J, K, L]:
+
+Post-order for this subtree: L, K, J, H, G, F, E, D, C, B
+Root = B (last element)
+In-order splits at B: [] | B | [C, D, E, F, G, H, J, K, L]
+
+For right subtree of B [C, D, E, F, G, H, J, K, L]:
+
+Post-order: L, K, J, H, G, F, E, D, C
+Root = C
+In-order splits at C: [] | C | [D, E, F, G, H, J, K, L]
+
+For right subtree of C [D, E, F, G, H, J, K, L]:
+
+Post-order: L, K, J, H, G, F, E, D
+Root = D
+In-order splits at D: [] | D | [E, F, G, H, J, K, L]
+
+Continuing this pattern, the structure is a completely right-skewed tree:
+A
+\
+ B
+\
+ C
+\
+ D
+\
+ E
+\
+ ...
+For a right-skewed BST:
+
+In-order: A, B, C, D, E, F, G, H, J, K, L (given ✓)
+Post-order: L, K, J, H, G, F, E, D, C, B, A (given ✓)
+Pre-order: A, B, C, D, E, F, G, H, J, K, L
+
+**Answer is (b) A, B, C, D, E, F, G, H, J, K, L**
 
 **8. Definitely TRUE statement**
 **Answer: e) Superman does not know topological sort, he wear his underwear outside.**
 
 This is a joke question - the answer is humorous and "definitely true" in the context.
+
+All the other options are just silly characterizations that don't have any logical connection:
+
+The Flash being fast has nothing to do with checking edge weights
+Spiderman swinging doesn't relate to BFS vs DFS traversal strategies
+Iron Man liking expensive things doesn't mean he can't find minimum costs
+Hulk smashing doesn't prevent understanding minimum spanning trees
+
+Option (e) is the only one with an actual logical connection between the character trait (wearing underwear outside) and the algorithm concept (topological ordering of dependencies).
 
 ---
 
@@ -92,86 +145,107 @@ Actually, let me trace this more carefully:
 ### Question 10B(i): Partition for LinkedList (10 marks)
 
 ```cpp
-void partition(ListNode* &input, ListNode* &less, ListNode* &greaterOrEqual) {
+// i) Partition method that splits a linked list into two lists
+// Parameters:
+//   input - the input linked list (will be emptied)
+//   smaller - linked list containing values < pivot (returned via reference)
+//   greaterOrEqual - linked list containing values >= pivot (returned via reference)
+void partition(ListNode* &input, ListNode* &smaller, ListNode* &greaterOrEqual) {
+    // Check if input is empty
     if (input == nullptr) {
-        less = nullptr;
+        smaller = nullptr;
         greaterOrEqual = nullptr;
         return;
     }
-    
-    int pivot = input->value;
-    ListNode* lessTail = nullptr;
-    ListNode* geTail = nullptr;
-    less = nullptr;
+
+    // Use first node's value as pivot
+    int pivotValue = input->value;
+
+    // Initialize the two result lists as empty
+    smaller = nullptr;
     greaterOrEqual = nullptr;
-    
-    ListNode* current = input->next; // Skip pivot
-    ListNode* pivotNode = input;
-    pivotNode->next = nullptr;
-    
+
+    // Pointers to track the tail of each list for efficient appending
+    ListNode* smallerTail = nullptr;
+    ListNode* greaterTail = nullptr;
+
+    // Process all nodes from input list
+    ListNode* current = input;
     while (current != nullptr) {
-        ListNode* nextNode = current->next;
-        current->next = nullptr;
-        
-        if (current->value < pivot) {
-            if (less == nullptr) {
-                less = current;
-                lessTail = current;
+        ListNode* nextNode = current->next;  // Save next pointer before modification
+        current->next = nullptr;  // Disconnect current node
+
+        if (current->value < pivotValue) {
+            // Add to smaller list
+            if (smaller == nullptr) {
+                // First node in smaller list
+                smaller = current;
+                smallerTail = current;
             } else {
-                lessTail->next = current;
-                lessTail = current;
+                // Append to end of smaller list
+                smallerTail->next = current;
+                smallerTail = current;
             }
         } else {
+            // Add to greaterOrEqual list
             if (greaterOrEqual == nullptr) {
+                // First node in greaterOrEqual list
                 greaterOrEqual = current;
-                geTail = current;
+                greaterTail = current;
             } else {
-                geTail->next = current;
-                geTail = current;
+                // Append to end of greaterOrEqual list
+                greaterTail->next = current;
+                greaterTail = current;
             }
         }
-        current = nextNode;
+
+        current = nextNode;  // Move to next node
     }
-    
-    // Add pivot to greaterOrEqual list
-    if (greaterOrEqual == nullptr) {
-        greaterOrEqual = pivotNode;
-    } else {
-        geTail->next = pivotNode;
-    }
+
+    // Input list is now empty
+    input = nullptr;
 }
+
 ```
 
 ### Question 10B(ii): Quicksort for LinkedList (10 marks)
 
 ```cpp
+// ii) Quicksort function for linked lists
+// Parameters:
+//   input - the unsorted linked list (will be consumed)
+//   sorted - the sorted linked list (returned via reference)
 void quickSort(ListNode* &input, ListNode* &sorted) {
+    // Base case: empty list or single node
     if (input == nullptr || input->next == nullptr) {
         sorted = input;
         return;
     }
-    
-    ListNode* less = nullptr;
+
+    // Partition the list into two sublists
+    ListNode* smaller = nullptr;
     ListNode* greaterOrEqual = nullptr;
-    
-    partition(input, less, greaterOrEqual);
-    
-    ListNode* sortedLess = nullptr;
-    ListNode* sortedGE = nullptr;
-    
-    quickSort(less, sortedLess);
-    quickSort(greaterOrEqual, sortedGE);
-    
-    // Merge: sortedLess + sortedGE
-    if (sortedLess == nullptr) {
-        sorted = sortedGE;
+    partition(input, smaller, greaterOrEqual);
+
+    // Recursively sort both sublists
+    ListNode* sortedSmaller = nullptr;
+    ListNode* sortedGreater = nullptr;
+    quickSort(smaller, sortedSmaller);
+    quickSort(greaterOrEqual, sortedGreater);
+
+    // Concatenate: sortedSmaller + sortedGreater
+    if (sortedSmaller == nullptr) {
+        // No smaller elements, result is just the greater list
+        sorted = sortedGreater;
     } else {
-        sorted = sortedLess;
-        ListNode* tail = sortedLess;
+        // Find the tail of sortedSmaller list
+        ListNode* tail = sortedSmaller;
         while (tail->next != nullptr) {
             tail = tail->next;
         }
-        tail->next = sortedGE;
+        // Append sortedGreater to the end
+        tail->next = sortedGreater;
+        sorted = sortedSmaller;
     }
 }
 ```
@@ -185,6 +259,7 @@ Use a **min-heap** of size k.
 **Data Structure:** Store pairs of (value, list_index) in the min-heap, where value is the current head value of each list.
 
 **Process:**
+
 1. Initialize: Insert the first node from each of the k lists into the min-heap (k insertions, O(k log k))
 2. While heap is not empty:
    - Extract minimum from heap (O(log k))
@@ -211,22 +286,40 @@ Using smallest vertex ID first when multiple options:
 
 ### Question 12d: Dijkstra's Algorithm (10 marks)
 
-| Step | Source | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-|------|--------|---|---|---|---|---|---|---|---|
-| 1 | 1 | 0 | 2 | 5 | ∞ | ∞ | ∞ | ∞ | ∞ |
-| 2 | 2 | 0 | 2 | 5 | 8 | ∞ | ∞ | ∞ | ∞ |
-| 3 | 3 | 0 | 2 | 5 | 8 | 8 | ∞ | 8 | ∞ |
-| 4 | 5 | 0 | 2 | 5 | 8 | 8 | 14 | 8 | ∞ |
-| 5 | 7 | 0 | 2 | 5 | 8 | 8 | 14 | 8 | 16 |
-| 6 | 4 | 0 | 2 | 5 | 8 | 8 | 12 | 8 | 16 |
-| 7 | 6 | 0 | 2 | 5 | 8 | 8 | 12 | 8 | 15 |
-| 8 | 8 | 0 | 2 | 5 | 8 | 8 | 12 | 8 | 15 |
+| Step | Source | Vetex | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
+| ---- | ------ | ----- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1    | 1      | -     | 0   | 2   | 5   | ∞   | ∞   | ∞   | ∞   | ∞   |
+| 2    | 2      | 1     | 0   | 2   | 5   | 3   | 5   | ∞   | ∞   | ∞   |
+| 3    | 4      | 2     | 0   | 2   | 5   | 3   | 5   | ∞   | 9   | ∞   |
+| 4    | 5      | 3     | 0   | 2   | 5   | 3   | 5   | 7   | 9   | ∞   |
+| 5    | 3      | 5     | 0   | 2   | 5   | 3   | 5   | 7   | 9   | ∞   |
+| 6    | 6      | 3     | 0   | 2   | 5   | 3   | 5   | 7   | 9   | 10  |
+| 7    | 7      | 6     | 0   | 2   | 5   | 3   | 5   | 7   | 9   | 10  |
+| 8    | 8      | 7     | 0   | 2   | 5   | 3   | 5   | 7   | 9   | 10  |
+
+Let me clarify the difference between the Source and Vetex (Vertex) columns in Dijkstra's algorithm table:
+Source Column
+
+What it represents: The vertex that is currently being processed/explored in that step
+Purpose: Shows which vertex we just selected (the unvisited vertex with the smallest distance) and are now examining its neighbors
+Value: A specific vertex number (1, 2, 3, 4, 5, 6, 7, or 8)
+
+Vetex (Vertex) Column
+
+What it represents: The vertex that was just marked as visited/finalized in the previous step
+Purpose: Keeps track of which vertex we finished processing in the last iteration
+Value:
+
+"-" in Step 1 (no previous vertex, this is initialization)
+A vertex number in subsequent steps (the vertex that was the "Source" in the previous step)
+OR it could represent the count/number of vertices visited so far (alternative interpretation)
 
 ### Question 12e: Prim's MST (10 marks)
 
 Starting from vertex 1:
+
 - Add edge 1→2 (weight 2)
-- Add edge 2→4 (weight 6)  
+- Add edge 2→4 (weight 6)
 - Add edge 1→5 (weight 4)
 - Add edge 5→3 (weight 3)
 - Add edge 3→7 (weight 3)
