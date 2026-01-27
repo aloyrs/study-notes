@@ -50,6 +50,12 @@ Wraps around modulo 2^n.
 Example (8-bit):
 255 + 1 = 0
 
+Example (4-bit):
+
+- Max value = 1111 (15)
+- 1111 + 0001 = 10000
+- Since can only read 4 bits, result overflows = 0000 the '1' is lost
+
 ## Signed Overflow
 
 In C/C++: undefined behavior (dangerous).
@@ -57,6 +63,24 @@ In hardware: still wraps, but language may not guarantee it.
 
 Example (8-bit signed):
 127 + 1 = -128
+
+In a 4-bit signed system using two's complement, the leftmost bit serves as the sign indicator (0 for positive, 1 for negative).
+
+- Range: -8 to +7
+- Calculation: (4)+(5) or 0100+0101
+- Binary Result: 1001
+- To find the value of 1001, you invert the bits (0110) and add one (0111), which equals 7. Therefore, 1001 is -7.
+- Interpretation: In signed 4-bit, represents -7. Since 4 + 5 is 9, and 9 is outside the available range, the value wraps around into the negative territory. This is identified as overflow because adding two positive numbers resulted in a negative bit pattern.
+
+Why it "Wrapped Around"?
+
+Think of signed numbers on a circle rather than a straight line.
+
+The highest positive number you can have is 7 (0111). If you add 1 to it, the binary becomes 1000, which is -8.
+
+In your calculation, 4 + 5 = 9. Since 9 is two steps past the limit of 7, it lands on -7.
+
+Think 7 -> -8 -> -7
 
 ---
 
