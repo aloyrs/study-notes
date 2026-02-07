@@ -179,3 +179,27 @@ x < y → unsigned(x) < y
 4294967295 < 1 → false
 
 Common source of bugs.
+
+# Endianess
+
+## The Core Difference
+
+Imagine we have a 32-bit hexadecimal value: 0x12345678. To store this, the computer breaks it into four bytes: 12, 34, 56, and 78.
+
+### 1. Big-Endian (The Natural Way)
+
+Big-endian stores the Big End (the most significant byte) first. This is how we humans typically write numbers.
+
+* Order: 12, 34, 56, 78
+* Common Use: Networking protocols (TCP/IP is often called Network Byte Order) and older processors like PowerPC.
+
+---
+
+### 2. Little-Endian (The Intel Way)
+
+Little-endian stores the Little End (the least significant byte) first.
+
+* Order: 78, 56, 34, 12
+* Common Use: Modern X86 processors (Intel/AMD) and most ARM processors (though ARM can be Bi-endian).
+
+Would you like me to explain how this affects specific file formats like JPEGs or WAV files?
